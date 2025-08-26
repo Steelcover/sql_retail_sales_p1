@@ -73,7 +73,7 @@ The following SQL queries were developed to answer specific business questions:
 1. **Write a SQL query to retrieve all columns for sales made on '2022-11-05**:
 ```sql
 SELECT *
-FROM retail_sales
+FROM retail_sales 
 WHERE sale_date = '2022-11-05';
 ```
 
@@ -88,22 +88,24 @@ WHERE
     TO_CHAR(sale_date, 'YYYY-MM') = '2022-11'
     AND
     quantity >= 4
+
+ALTER TABLE retail_sales            --Altering Column name
+RENAME COLUMN quantiy TO quantity
 ```
 
 3. **Write a SQL query to calculate the total sales (total_sale) for each category.**:
 ```sql
-SELECT 
-    category,
-    SUM(total_sale) as net_sale,
-    COUNT(*) as total_orders
+SELECT category, 
+SUM(total_sale) as net_sale,
+COUNT(*) as total_orders
 FROM retail_sales
-GROUP BY 1
+GROUP BY category
 ```
 
 4. **Write a SQL query to find the average age of customers who purchased items from the 'Beauty' category.**:
 ```sql
-SELECT
-    ROUND(AVG(age), 2) as avg_age
+SELECT 
+ROUND(AVG(age), 2) as "avg_age"
 FROM retail_sales
 WHERE category = 'Beauty'
 ```
@@ -116,15 +118,10 @@ WHERE total_sale > 1000
 
 6. **Write a SQL query to find the total number of transactions (transaction_id) made by each gender in each category.**:
 ```sql
-SELECT 
-    category,
-    gender,
-    COUNT(*) as total_trans
+SELECT category, gender,
+COUNT(*) as total_transactions
 FROM retail_sales
-GROUP 
-    BY 
-    category,
-    gender
+GROUP BY gender,category
 ORDER BY 1
 ```
 
@@ -145,13 +142,14 @@ FROM retail_sales
 GROUP BY 1, 2
 ) as t1
 WHERE rank = 1
+    
+-- ORDER BY 1, 3 DESC
 ```
 
 8. **Write a SQL query to find the top 5 customers based on the highest total sales **:
 ```sql
-SELECT 
-    customer_id,
-    SUM(total_sale) as total_sales
+SELECT  customer_id,
+SUM(total_sale) as total_sales
 FROM retail_sales
 GROUP BY 1
 ORDER BY 2 DESC
@@ -160,9 +158,8 @@ LIMIT 5
 
 9. **Write a SQL query to find the number of unique customers who purchased items from each category.**:
 ```sql
-SELECT 
-    category,    
-    COUNT(DISTINCT customer_id) as cnt_unique_cs
+SELECT category,
+COUNT(DISTINCT customer_id) as unique_customer
 FROM retail_sales
 GROUP BY category
 ```
@@ -185,6 +182,8 @@ SELECT
     COUNT(*) as total_orders    
 FROM hourly_sale
 GROUP BY shift
+
+-- End of project
 ```
 
 ## Findings
@@ -204,24 +203,11 @@ GROUP BY shift
 
 This project serves as a comprehensive introduction to SQL for data analysts, covering database setup, data cleaning, exploratory data analysis, and business-driven SQL queries. The findings from this project can help drive business decisions by understanding sales patterns, customer behavior, and product performance.
 
-## How to Use
 
-1. **Clone the Repository**: Clone this project repository from GitHub.
-2. **Set Up the Database**: Run the SQL scripts provided in the `database_setup.sql` file to create and populate the database.
-3. **Run the Queries**: Use the SQL queries provided in the `analysis_queries.sql` file to perform your analysis.
-4. **Explore and Modify**: Feel free to modify the queries to explore different aspects of the dataset or answer additional business questions.
 
-## Author - Zero Analyst
+This project is part of my portfolio, showcasing the SQL skills essential for data analyst roles. 
 
-This project is part of my portfolio, showcasing the SQL skills essential for data analyst roles. If you have any questions, feedback, or would like to collaborate, feel free to get in touch!
+- **LinkedIn**: [Connect with me professionally](https://www.linkedin.com/in/khushi-kumari-b979a5265?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app)
 
-### Stay Updated and Join the Community
 
-For more content on SQL, data analysis, and other data-related topics, make sure to follow me on social media and join our community:
 
-- **YouTube**: [Subscribe to my channel for tutorials and insights](https://www.youtube.com/@zero_analyst)
-- **Instagram**: [Follow me for daily tips and updates](https://www.instagram.com/zero_analyst/)
-- **LinkedIn**: [Connect with me professionally](https://www.linkedin.com/in/najirr)
-- **Discord**: [Join our community to learn and grow together](https://discord.gg/36h5f2Z5PK)
-
-Thank you for your support, and I look forward to connecting with you!
